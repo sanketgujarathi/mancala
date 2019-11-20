@@ -1,8 +1,8 @@
 package com.bol.assignment;
 
 
-import com.bol.assignment.domain.MancalaBoardImpl;
-import com.bol.assignment.domain.Board;
+import com.bol.assignment.engine.MancalaBoardImpl;
+import com.bol.assignment.engine.Board;
 import com.bol.assignment.service.Game;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class MancalaGameRunnerTest {
 
     @Test
     public void testRunMethod() {
-        Board board = new MancalaBoardImpl();
+        Board board = new MancalaBoardImpl(6, 6);
         //when(game.play()).thenReturn(board);
 
         mancalaGameRunner.run("args");

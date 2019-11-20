@@ -1,6 +1,6 @@
 package com.bol.assignment.service;
 
-import com.bol.assignment.domain.Board;
+import com.bol.assignment.engine.Board;
 import com.bol.assignment.domain.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

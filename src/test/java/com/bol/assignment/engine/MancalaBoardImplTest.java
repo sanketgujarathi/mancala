@@ -1,5 +1,6 @@
-package com.bol.assignment.domain;
+package com.bol.assignment.engine;
 
+import com.bol.assignment.domain.Player;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,12 +27,12 @@ public class MancalaBoardImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.mancalaBoard = new MancalaBoardImpl();
+        this.mancalaBoard = new MancalaBoardImpl(6, 6);
         mancalaBoard.init(player1, player2);
     }
 
     @Test
-    public void init() {
+    public void test_board_gets_intitialized_correctly() {
         int[] afterInit = {6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0};
         assertThat(mancalaBoard.board, is(afterInit));
         assertThat(mancalaBoard.player1, is(player1));

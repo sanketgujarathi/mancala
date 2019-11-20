@@ -1,4 +1,6 @@
-package com.bol.assignment.domain;
+package com.bol.assignment.engine;
+
+import com.bol.assignment.domain.Player;
 
 import java.util.Optional;
 

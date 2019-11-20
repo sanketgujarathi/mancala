@@ -1,0 +1,4 @@
+mancala:
+  board:
+    pits: 4
+    init-stones: 4

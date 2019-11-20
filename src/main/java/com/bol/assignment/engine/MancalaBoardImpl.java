@@ -1,7 +1,9 @@
-package com.bol.assignment.domain;
+package com.bol.assignment.engine;
 
+import com.bol.assignment.domain.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import static java.util.Optional.of;
 @Repository
 public class MancalaBoardImpl implements Board {
 
+    private final int NUM_OF_PITS;
+    private final int INIT_STONES;
     int[] board;
     Map<Player, PlayArea> playAreaMap;
     Player player1;
@@ -23,20 +27,25 @@ public class MancalaBoardImpl implements Board {
     boolean gameOver;
     private static Logger log = LoggerFactory.getLogger(MancalaBoardImpl.class);
 
+    public MancalaBoardImpl(@Value("${mancala.board.pits}")int numOfPits, @Value("${mancala.board.init-stones}") int initStones) {
+        NUM_OF_PITS = numOfPits;
+        INIT_STONES = initStones;
+        board = new int[NUM_OF_PITS * 2 + 2];
+    }
+
     @Override
     public void init(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
         playAreaMap = new HashMap<>();
-        playAreaMap.put(this.player1, new PlayArea(0, 6, 36));
-        playAreaMap.put(this.player2, new PlayArea(7, 13, 36));
+        playAreaMap.put(this.player1, new PlayArea(0, board.length / 2 - 1, NUM_OF_PITS * INIT_STONES));
+        playAreaMap.put(this.player2, new PlayArea(board.length / 2, board.length - 1, NUM_OF_PITS * INIT_STONES));
         initializeBoard();
         gameOver = false;
     }
 
     private void initializeBoard() {
-        this.board = new int[14];
-        playAreaMap.entrySet().forEach(p -> Arrays.fill(this.board, p.getValue().startIndex, p.getValue().mancalaIndex, 6));
+        playAreaMap.forEach((k,v) -> Arrays.fill(this.board, v.startIndex, v.mancalaIndex, INIT_STONES));
     }
 
     @Override

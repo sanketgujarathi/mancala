@@ -1,18 +1,10 @@
 package com.bol.assignment.service;
 
-import com.bol.assignment.domain.Board;
-import com.bol.assignment.domain.MancalaBoardImpl;
 import com.bol.assignment.domain.Player;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.io.ByteArrayInputStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
 
 public class MancalaGameImplTest {
 
