@@ -56,7 +56,6 @@ public class MancalaBoardImpl implements Board {
             throw new IllegalStateException("Invalid invocation. Game is over!");
         }
         PlayArea ownArea = this.playAreaMap.get(player);
-        PlayArea opponentArea = this.playAreaMap.get(getOpponent(player));
         int choosenPitIndex = ownArea.startIndex + choosenPit - 1;
         int remainingStones = this.board[choosenPitIndex];
         if (remainingStones == 0) {
@@ -67,7 +66,8 @@ public class MancalaBoardImpl implements Board {
         board[choosenPitIndex] = 0;
         while (remainingStones > 0) {
             currentPitIndex = incrementIndex(currentPitIndex);
-            if (landedInOwnArea(ownArea, currentPitIndex)) {
+            PlayArea opponentArea = this.playAreaMap.get(getOpponent(player));
+            if (landedInOwnArea(player, currentPitIndex)) {
                 if (currentPitIndex == ownArea.mancalaIndex) {
                     ownArea.stonesInPlay--;
                 } else if (remainingStones == 1 && this.board[currentPitIndex] == 0) {
@@ -79,7 +79,7 @@ public class MancalaBoardImpl implements Board {
                     break;
                 }
             } else {
-                if (currentPitIndex == opponentArea.mancalaIndex) {
+                if (skipPit(player, currentPitIndex)) {
                     continue;
                 } else {
                     ownArea.stonesInPlay--;
@@ -89,13 +89,8 @@ public class MancalaBoardImpl implements Board {
             this.board[currentPitIndex]++;
             remainingStones--;
         }
-        if (ownArea.stonesInPlay == 0) {
-            gameOver = true;
-            log.info("Game Over! Player {} ran out of stones", player.getPlayerName());
-            return empty();
+        return getPlayerForNextTurn(player, currentPitIndex);
 
-        }
-        return landedInOwnArea(ownArea, currentPitIndex) ? of(player): of(getOpponent(player));
     }
 
     private Player getOpponent(Player player) {
@@ -106,11 +101,29 @@ public class MancalaBoardImpl implements Board {
         return currIndex == this.board.length - 1 ? 0 : currIndex + 1;
     }
 
-    private boolean landedInOwnArea(PlayArea ownArea, int currentPitIndex) {
+    private boolean skipPit(Player player, int currentPitIndex) {
+        return currentPitIndex == playAreaMap.get(getOpponent(player)).mancalaIndex;
+    }
 
+    private boolean landedInOwnArea(Player player, int currentPitIndex) {
+        PlayArea ownArea = playAreaMap.get(player);
         return currentPitIndex >= ownArea.startIndex && currentPitIndex <= ownArea.mancalaIndex;
     }
 
+
+    private Optional<Player> getPlayerForNextTurn(Player player, int currentPitIndex) {
+        if (ranOutOfStones(player)) {
+            gameOver = true;
+            log.info("Game Over! Player {} ran out of stones", player.getPlayerName());
+            return empty();
+        }
+        return landedInOwnArea(player, currentPitIndex) ? of(player): of(getOpponent(player));
+    }
+
+    private boolean ranOutOfStones(Player player) {
+        PlayArea ownArea = playAreaMap.get(player);
+        return ownArea.stonesInPlay == 0;
+    }
 
     @Override
     public Player getWinner() {
