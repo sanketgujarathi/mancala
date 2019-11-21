@@ -143,9 +143,9 @@ public class MancalaBoardImpl implements Board {
         int[] player1Pits = Arrays.copyOfRange(this.board, player1Area.startIndex, player1Area.mancalaIndex + 1);
         PlayArea player2Area = this.playAreaMap.get(player2);
         int[] player2Pits = Arrays.copyOfRange(this.board, player2Area.startIndex, player2Area.mancalaIndex + 1);
-        log.info("******Current Board******");
-        log.info(Arrays.toString(IntStream.range(0, player2Pits.length).map(i -> player2Pits[player2Pits.length - 1 - i]).toArray()));
-        log.info(Arrays.toString(player1Pits));
+        log.info("**************Current Board**************");
+        log.info("Mancala2 --> {}", Arrays.toString(IntStream.range(0, player2Pits.length).map(i -> player2Pits[player2Pits.length - 1 - i]).toArray()));
+        log.info("             {} <-- Mancala1", Arrays.toString(player1Pits));
 
     }
 

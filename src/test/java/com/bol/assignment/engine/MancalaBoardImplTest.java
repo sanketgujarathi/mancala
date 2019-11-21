@@ -43,7 +43,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_last_stone_lands_in_own_pit() {
+    public void test_update_when_last_stone_lands_in_own_pit_repeat_turn() {
         int[] beforeMove = {6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0};
         int[] afterMove = {0, 7, 7, 7, 7, 7, 1, 6, 6, 6, 6, 6, 6, 0};
 
@@ -55,7 +55,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_last_stone_lands_in_opponents_pit() {
+    public void test_update_when_last_stone_lands_in_opponents_pit_change_turn() {
         int[] beforeMove = {6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0};
         int[] afterMove = {6, 6, 6, 6, 6, 0, 1, 7, 7, 7, 7, 7, 6, 0};
 
@@ -67,7 +67,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_last_stone_lands_in_own_empty_pit() {
+    public void test_update_when_last_stone_lands_in_own_empty_pit_capture_opp_pit() {
         int[] beforeMove = {1, 0, 8, 8, 8, 8, 2, 0, 7, 7, 7, 7, 7, 1};
         int[] afterMove = {0, 0, 8, 8, 8, 8, 10, 0, 7, 7, 7, 0, 7, 1};
 
@@ -79,7 +79,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_last_stone_lands_in_oppositions_empty_pit() {
+    public void test_update_when_last_stone_lands_in_oppositions_empty_pit_then_pit_not_captured() {
         int[] beforeMove = {0, 0, 8, 8, 8, 8, 2, 7, 6, 6, 6, 6, 6, 0};
         int[] afterMove = {1, 0, 8, 8, 8, 8, 2, 0, 7, 7, 7, 7, 7, 1};
 
@@ -92,7 +92,7 @@ public class MancalaBoardImplTest {
 
 
     @Test
-    public void when_game_over_player_not_returned() {
+    public void test_update_when_game_over_player_not_returned() {
         int[] beforeMove = {2, 0, 2, 12, 0, 1, 24, 0, 0, 0, 0, 0, 7, 24};
         int[] afterMove = {3, 1, 3, 13, 1, 2, 24, 0, 0, 0, 0, 0, 0, 25};
         mancalaBoard.playAreaMap.get(player2).stonesInPlay = 7;
@@ -107,7 +107,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_opponents_mancala_encountered_skip_it() {
+    public void test_update_when_opponents_mancala_encountered_skip_it() {
         int[] beforeMove = {0, 0, 8, 8, 8, 8, 10, 0, 7, 7, 7, 0, 7, 1};
         int[] afterMove = {0, 0, 8, 8, 8, 0, 20, 1, 8, 8, 8, 1, 0, 1};
 
@@ -119,7 +119,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void move_not_allowed_when_game_over() {
+    public void test_update_when_game_over_further_moves_not_allowed() {
         int[] beforeMove = {3, 1, 3, 13, 1, 2, 24, 0, 0, 0, 0, 0, 0, 25};
         mancalaBoard.playAreaMap.get(player1).stonesInPlay = 23;
         mancalaBoard.playAreaMap.get(player2).stonesInPlay = 0;
@@ -132,7 +132,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test
-    public void when_player_chooses_empty_pit_replay_turn() {
+    public void test_update_when_player_chooses_empty_pit_replay_turn() {
         int[] beforeMove = {0, 0, 8, 8, 8, 8, 10, 0, 7, 7, 7, 0, 7, 1};
         int[] afterMove = {0, 0, 8, 8, 8, 8, 10, 0, 7, 7, 7, 0, 7, 1};
 
@@ -145,7 +145,7 @@ public class MancalaBoardImplTest {
 
 
     @Test
-    public void test_winner_returned_after_game_over() { //TODO tst name
+    public void test_get_winner_when_game_over_returns_winning_player() {
         int[] afterMove = {3, 1, 3, 13, 1, 2, 24, 0, 0, 0, 0, 0, 0, 25};
         mancalaBoard.playAreaMap.get(player1).stonesInPlay = 23;
         mancalaBoard.playAreaMap.get(player2).stonesInPlay = 0;
@@ -158,7 +158,7 @@ public class MancalaBoardImplTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void test_error_returned_after_game_not_over() { //TODO tst name
+    public void test_get_winner_when_game_not_over_throws_error() {
         int[] afterMove = {3, 1, 3, 13, 1, 2, 24, 0, 0, 0, 0, 0, 0, 25};
         mancalaBoard.playAreaMap.get(player1).stonesInPlay = 23;
         mancalaBoard.playAreaMap.get(player2).stonesInPlay = 0;
