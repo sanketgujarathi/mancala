@@ -29,6 +29,7 @@ public class MancalaGameImpl implements Game {
         this.player1.init();
         this.player2.init();
         this.board.init(this.player1, this.player2);
+        log.info("Mancala game initialised...");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.bol.assignment;
 
 
+import com.bol.assignment.domain.Player;
 import com.bol.assignment.engine.MancalaBoardImpl;
 import com.bol.assignment.engine.Board;
 import com.bol.assignment.service.Game;
@@ -27,12 +28,12 @@ public class MancalaGameRunnerTest {
 
     @Test
     public void testRunMethod() {
-        Board board = new MancalaBoardImpl(6, 6);
-        //when(game.play()).thenReturn(board);
+        when(game.getWinner()).thenReturn(new Player());
 
         mancalaGameRunner.run("args");
 
         verify(game, times(1)).init();
         verify(game, times(1)).play();
+        verify(game, times(1)).getWinner();
     }
 }

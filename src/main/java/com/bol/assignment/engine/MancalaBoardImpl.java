@@ -42,6 +42,7 @@ public class MancalaBoardImpl implements Board {
         playAreaMap.put(this.player2, new PlayArea(board.length / 2, board.length - 1, NUM_OF_PITS * INIT_STONES));
         initializeBoard();
         gameOver = false;
+        log.info("Mancala board initialised...");
     }
 
     private void initializeBoard() {
