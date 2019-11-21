@@ -1,4 +1,4 @@
 mancala:
   board:
-    pits: 4
-    init-stones: 4
+    pits: 6
+    init-stones: 6
