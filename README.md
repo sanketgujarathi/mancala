@@ -26,26 +26,18 @@ Navigate to the target directory where the jar was build. Run the following comm
 java -jar mancala 1.0-SNAPSHOT.jar
 ```
 
-Follow the instructions displayed on the console to play the game.
+Open the link http://localhost:8080/mancala/index.html
 
-```
-Welcome to the game of Mancala!
-Enter your name:
-p1
-Enter your name:
-p2
-Mancala board initialised...
-Mancala game initialised...
-**************Current Board**************
-Mancala2 --> [0, 6, 6, 6, 6, 6, 6]
-             [6, 6, 6, 6, 6, 6, 0] <-- Mancala1
-Player P1 Choose a pit(1-6):
-1
-**************Current Board**************
-Mancala2 --> [0, 6, 6, 6, 6, 6, 6]
-             [0, 7, 7, 7, 7, 7, 1] <-- Mancala1
-Player P1 Choose a pit(1-6):
-```
+![Welcome Screen](/img/welcome.jpg?raw=true "Welcome Screen")
+
+
+Click on the New Game button to start the game.
+
+Players should click on the pits in their area to make a move.
+
+Players turn will be indicated in the UI.
+
+Game ends when all the pits belonging to one of the players are empty
 
 
 ## Running the tests
